@@ -1,5 +1,7 @@
 # Screenbeacon node.js bindings [![Build Status](https://travis-ci.org/screenbeacon/screenbeacon-node.png?branch=master)](https://travis-ci.org/screenbeacon/screenbeacon-node)
 
+IN ACTIVE DEVELOPMENT. NOT PRODUCTION READY.
+
 ## Installation
 
 `npm install screenbeacon`
