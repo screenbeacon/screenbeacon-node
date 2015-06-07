@@ -15,7 +15,7 @@ describe('Project Resource', function() {
       screenbeacon.project.retrieve(238);
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'GET',
-        url: '/v1/customers/cus_2dkAb792h1mfa4',
+        url: '/projects/238',
         headers: {},
         data: {}
       });
@@ -27,7 +27,7 @@ describe('Project Resource', function() {
       screenbeacon.project.retrieve('dalkf', TEST_AUTH_KEY);
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'GET',
-        url: '/v1/customers/cus_2dkAb792h1mfa4',
+        url: '/projects/238',
         headers: {},
         data: {},
         auth: TEST_AUTH_KEY
@@ -41,12 +41,12 @@ describe('Project Resource', function() {
 
     it('Sends the correct request', function() {
 
-      screenbeacon.customers.create({ description: 'Some customer' });
+      screenbeacon.projects.create({ name: 'dude', description: 'Some customer' });
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
-        url: '/v1/customers',
+        url: '/projects',
         headers: {},
-        data: { description: 'Some customer' }
+        data: { description: 'Some project' }
       });
 
     });
@@ -56,7 +56,7 @@ describe('Project Resource', function() {
       screenbeacon.customers.create({ description: 'Some customer' }, TEST_AUTH_KEY);
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
-        url: '/v1/customers',
+        url: '/projects',
         headers: {},
         data: { description: 'Some customer' },
         auth: TEST_AUTH_KEY
@@ -66,10 +66,10 @@ describe('Project Resource', function() {
 
     it('Sends the correct request [with specified auth and no body]', function() {
 
-      screenbeacon.customers.create(TEST_AUTH_KEY);
+      screenbeacon.projects.create(TEST_AUTH_KEY);
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
-        url: '/v1/customers',
+        url: '/projects',
         headers: {},
         data: {},
         auth: TEST_AUTH_KEY
@@ -79,10 +79,10 @@ describe('Project Resource', function() {
 
     it('Sends the correct request [with specified idempotency_key in options]', function() {
 
-      screenbeacon.customers.create({ description: 'Some customer' }, { idempotency_key: 'foo' });
+      screenbeacon.projects.create({ description: 'Some customer' }, { idempotency_key: 'foo' });
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
-        url: '/v1/customers',
+        url: '/projects',
         headers: {'Idempotency-Key': 'foo'},
         data: { description: 'Some customer' },
       });
@@ -91,10 +91,10 @@ describe('Project Resource', function() {
 
     it('Sends the correct request [with specified auth in options]', function() {
 
-      screenbeacon.customers.create({ description: 'Some customer' }, { api_key: TEST_AUTH_KEY });
+      screenbeacon.customers.create({ description: 'Some project' }, { api_key: TEST_AUTH_KEY });
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
-        url: '/v1/customers',
+        url: '/projects',
         headers: {},
         data: { description: 'Some customer' },
         auth: TEST_AUTH_KEY
