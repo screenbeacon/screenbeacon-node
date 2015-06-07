@@ -1,0 +1,40 @@
+{
+  "name": "screenbeacon",
+  "version": "1.0.0",
+  "description": "Screenbeacon API wrapper",
+  "keywords": [
+    "screenbeacon",
+    "visual regression testing",
+    "integration testing",
+    "web design monitoring",
+    "api"
+  ],
+  "homepage": "https://github.com/screenbeacon/screenbeacon-node",
+  "author": "Screenbeacon <jordan@screenbeacon.com> (https://www.screenbeacon.com/)",
+  "contributors": [
+    "Jordan Humphreys <jordan@screenbeacon.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/screenbeacon/screenbeacon-node.git"
+  },
+  "bugs:": "https://github.com/screenbeacon/screenbeacon-node/issues",
+  "engines": {
+    "node": ">= v0.10.0"
+  },
+  "main": "lib/screenbeacon.js",
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "chai-as-promised": "~4.1.1",
+    "mocha": "~2.1.0"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.6",
+    "qs": "^2.3.3",
+    "lodash": "^3.1.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  }
+}
