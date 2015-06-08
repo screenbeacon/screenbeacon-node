@@ -52,7 +52,7 @@ screenbeacon.projects.create({
 
 ## Configuration
 
- * `screenbeacon.setApiID('API_ID');`
+ * `screenbeacon.setApiId('API_ID');`
  * `screenbeacon.setApiToken('API_TOKEN');`
  * `screenbeacon.setTimeout(20000); // in ms` (default is node's default: `120000ms`)
 
