@@ -1,36 +1,21 @@
 'use strict';
-
-var screenbeacon = require('../testUtils').getSpyableScreenbeacon();
+var TEST_API_ID = 'c171aadd4f';
+var TEST_API_TOKEN = '82fb985e-4461-4602-909b-d9c0e208977d';
+var screenbeacon = require('../testUtils').getSpyableScreenbeacon(TEST_API_ID, TEST_API_TOKEN);
 var expect = require('chai').expect;
 var Promise = require('bluebird');
-
-var TEST_AUTH_KEY = 'aGN0bIwXnHdw5645VABjPdSn8nWY7G11';
 
 describe('Project Resource', function() {
 
   describe('retrieve', function() {
 
     it('Sends the correct request', function() {
-
-      screenbeacon.project.retrieve(238);
+      screenbeacon.projects.retrieve(238);
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'GET',
         url: '/projects/238',
         headers: {},
         data: {}
-      });
-
-    });
-
-    it('Sends the correct request [with specified auth]', function() {
-
-      screenbeacon.project.retrieve('dalkf', TEST_AUTH_KEY);
-      expect(screenbeacon.LAST_REQUEST).to.deep.equal({
-        method: 'GET',
-        url: '/projects/238',
-        headers: {},
-        data: {},
-        auth: TEST_AUTH_KEY
       });
 
     });
@@ -41,76 +26,42 @@ describe('Project Resource', function() {
 
     it('Sends the correct request', function() {
 
-      screenbeacon.projects.create({ name: 'dude', description: 'Some customer' });
+      screenbeacon.projects.create({ name: 'dude', description: 'Some project' });
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
         url: '/projects',
         headers: {},
-        data: { description: 'Some project' }
+        data: { name: 'dude', description: 'Some project' }
       });
 
     });
 
-    it('Sends the correct request [with specified auth]', function() {
-
-      screenbeacon.customers.create({ description: 'Some customer' }, TEST_AUTH_KEY);
-      expect(screenbeacon.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/projects',
-        headers: {},
-        data: { description: 'Some customer' },
-        auth: TEST_AUTH_KEY
-      });
-
-    });
-
-    it('Sends the correct request [with specified auth and no body]', function() {
-
-      screenbeacon.projects.create(TEST_AUTH_KEY);
-      expect(screenbeacon.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/projects',
-        headers: {},
-        data: {},
-        auth: TEST_AUTH_KEY
-      });
-
-    });
-
-    it('Sends the correct request [with specified idempotency_key in options]', function() {
-
-      screenbeacon.projects.create({ description: 'Some customer' }, { idempotency_key: 'foo' });
-      expect(screenbeacon.LAST_REQUEST).to.deep.equal({
-        method: 'POST',
-        url: '/projects',
-        headers: {'Idempotency-Key': 'foo'},
-        data: { description: 'Some customer' },
-      });
-
-    });
 
     it('Sends the correct request [with specified auth in options]', function() {
 
-      screenbeacon.customers.create({ description: 'Some project' }, { api_key: TEST_AUTH_KEY });
+      screenbeacon.projects.create({ api_id: TEST_API_ID, api_token: TEST_API_TOKEN, description: 'Some project' });
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
         url: '/projects',
-        headers: {},
-        data: { description: 'Some customer' },
-        auth: TEST_AUTH_KEY
+        headers: {
+          "X-API-ID": "c171aadd4f",
+          "X-API-TOKEN": "82fb985e-4461-4602-909b-d9c0e208977d"
+        },
+        data: { description: 'Some project' },
+        auth: null
       });
 
     });
 
     it('Sends the correct request [with specified auth and idempotent key in options]', function() {
 
-      screenbeacon.customers.create({ description: 'Some customer' }, { api_key: TEST_AUTH_KEY, idempotency_key: 'foo'});
+      screenbeacon.customers.create({ description: 'Some customer' }, { idempotency_key: 'foo'});
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
         url: '/v1/customers',
         headers: {'Idempotency-Key': 'foo'},
         data: { description: 'Some customer' },
-        auth: TEST_AUTH_KEY
+        auth: null
       });
 
     });
@@ -118,13 +69,13 @@ describe('Project Resource', function() {
 
     it('Sends the correct request [with specified auth in options and no body]', function() {
 
-      screenbeacon.customers.create({ api_key: TEST_AUTH_KEY });
+      screenbeacon.customers.create();
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'POST',
         url: '/v1/customers',
         headers: {},
         data: {},
-        auth: TEST_AUTH_KEY
+        auth: null
       });
 
     });
@@ -182,13 +133,13 @@ describe('Project Resource', function() {
 
     it('Sends the correct request [with specified auth]', function() {
 
-      screenbeacon.customers.list(TEST_AUTH_KEY);
+      screenbeacon.customers.list();
       expect(screenbeacon.LAST_REQUEST).to.deep.equal({
         method: 'GET',
         url: '/v1/customers',
         headers: {},
         data: {},
-        auth: TEST_AUTH_KEY
+        auth: null
       });
 
     });

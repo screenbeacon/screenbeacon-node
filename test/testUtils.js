@@ -14,12 +14,12 @@ var utils = module.exports = {
     return key;
   },
 
-  getSpyableScreenbeacon: function() {
+  getSpyableScreenbeacon: function(TEST_API_ID, TEST_API_TOKEN) {
     // Provide a testable screenbeacon instance
     // That is, with mock-requests built in and hookable
 
     var Screenbeacon = require('../lib/screenbeacon');
-    var screenbeaconInstance = Screenbeacon('fakeAuthToken');
+    var screenbeaconInstance = Screenbeacon(TEST_API_ID,TEST_API_TOKEN);
 
     screenbeaconInstance.REQUESTS = [];
 
